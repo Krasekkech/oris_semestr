@@ -1,9 +1,7 @@
 package service;
 
-import model.Client;
 import model.ClientProfile;
 import repository.ClientProfileRepository;
-import repository.ClientRepository;
 
 public class ClientProfileService {
 
@@ -17,7 +15,25 @@ public class ClientProfileService {
         return repository.save(clientProfile);
     }
 
-    public ClientProfile findById(Long id) {
+    public String findById(Long id) {
         return repository.findById(id);
     }
+
+    public String findAll() {
+        return repository.findAll();
+    }
+
+    public String findByUserName(String username) {
+        return repository.findByUserName(username);
+    }
+
+    public ClientProfile update(ClientProfile clientProfile) {
+        return repository.update(clientProfile);
+    }
+
+    public ClientProfile delete(String username) { return repository.delete(username);
+    }
+
+
+    //public void update(ClientProfile clientProfile) {
 }

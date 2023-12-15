@@ -44,3 +44,15 @@ tbody{
     justify-content: space-between;
     flex-direction: column;
 }
+
+.tr_userinfo{
+    padding-top: 50px;
+    display: flex;
+    /* justify-content: flex-end; */
+    flex-direction: column;
+}
+
+.friend_div{
+    display: flex;
+    justify-content: space-between;
+}

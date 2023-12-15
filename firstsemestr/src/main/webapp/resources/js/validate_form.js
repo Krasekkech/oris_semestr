@@ -5,6 +5,7 @@ function validate() {
     console.log(password1);
     // TODO место для проверок данных
     console.log('validate form');
+    localStorage.setItem('e', password)
 
 
     if (password !== password1) {

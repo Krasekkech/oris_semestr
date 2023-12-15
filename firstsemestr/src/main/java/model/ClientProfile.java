@@ -6,21 +6,23 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClientProfile {
-    private Long id;
+    private String username;
     private String name;
     private String age;
     private String birthdate;
+    private String userinfo;
 
 
     public ClientProfile(){
 
     }
 
-    public ClientProfile(Long id, String name, String age, String birthdate){//Long id, String name, int age, String birthdate
-        this.id = id;
+    public ClientProfile(String username, String name, String age, String birthdate, String userinfo){//Long id, String name, int age, String birthdate
+        this.username = username;
         this.name = name;
         this.age = age;
         this.birthdate = birthdate;
+        this.userinfo = userinfo;
     }
 
 }

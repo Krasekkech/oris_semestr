@@ -1,6 +1,7 @@
 package repository;
 
 import model.Client;
+import model.ClientProfile;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -115,6 +116,34 @@ public class ClientRepository {
             if (resultSet.next()) {
                 client.setId(resultSet.getLong("id"));
             }
+
+            resultSet.close();
+            statement.close();
+
+            return client;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Client copy( Client client){
+        try {
+            Connection connection = DBConnection.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "insert into client (id, username, name) " +
+                            "select 'id','username','name' from 'clientprofile'"+
+                                "where id = ?"
+            );
+
+            statement.setLong(1, client.getId());
+            statement.setString(2, client.getUserName());
+            statement.setString(3, client.getName());
+
+            ResultSet resultSet = statement.executeQuery();
+
+//            if (resultSet.next()) {
+//                clientProfile.setId(resultSet.getLong("id"));
+//            }
 
             resultSet.close();
             statement.close();

@@ -3,29 +3,32 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>firstsemestr login</title>
+    <link href="resources/css/login.css" rel="stylesheet">
     <meta charset="utf-8"/>
 </head>
 <body>
-<h1>Аутентификация</h1>
+<div class="main__content">
+    <h1>Аутентификация</h1>
 
-<h2 color="red">${message}</h2>
+    <h2 color="red">${message}</h2>
 
-<form method="post" action="/firstsemestr_war_exploded/usercheck">
-    <table>
-        <tr>
-            <td><label>Имя:</label></td>
-            <td><input type="text" name="username" placeholder="введите имя пользователя"></td>
-        </tr>
-        <tr>
-            <td><label>Пароль:</label></td>
-            <td><input type="password" name="password"></td>
-        </tr>
-    </table>
-    <div><input type="submit" value="Вход"></div>
-</form>
+    <form method="post" action="/firstsemestr_war_exploded/usercheck">
+        <table>
+            <tr>
+                <td><label>Логин:</label></td>
+                <td><input type="text" name="username" placeholder="введите имя пользователя"></td>
+            </tr>
+            <tr>
+                <td><label>Пароль:</label></td>
+                <td><input type="password" name="password"></td>
+            </tr>
+        </table>
+        <div class="btn_div"><input type="submit" value="Вход" class="btn"></div>
+    </form>
 
-<div>
-    <a href="/firstsemestr_war_exploded/regpage">Don't you have an account?</a>
+    <div class="lin">
+        <a href="/firstsemestr_war_exploded/regpage">Don't you have an account?</a>
+    </div>
 </div>
 </body>
 </html>

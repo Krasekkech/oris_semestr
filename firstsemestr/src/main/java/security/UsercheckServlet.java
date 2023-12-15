@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Client;
+import model.ClientProfile;
+import service.ClientFriendService;
+import service.ClientProfileService;
 import service.ClientService;
 import java.io.IOException;
 
@@ -21,6 +24,8 @@ import java.io.IOException;
 public class UsercheckServlet extends HttpServlet {
 
     private ClientService service = new ClientService();
+    private ClientProfileService profileservice = new ClientProfileService();
+    private ClientFriendService friendservice = new ClientFriendService();
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -33,8 +38,11 @@ public class UsercheckServlet extends HttpServlet {
         // ищем в БД пользователя с указанным логином
         Client client = service.findByUserName(username);
 
+
+
+
         // если пользователь нашелся надо проверить пароль
-        if ( client != null && client.getPassword().equals(password)) {
+        if (client != null && client.getPassword().equals(password)) {
 
             // Создаем сессию для пользователя, в атрибутах которой сохраним его идентификаторы
             HttpSession session = request.getSession();
@@ -42,6 +50,17 @@ public class UsercheckServlet extends HttpServlet {
             // будем хранить в сессии имя клиента и его id для работы с БД
             session.setAttribute("clientname", client.getName());
             session.setAttribute("clientid", client.getId());
+            session.setAttribute("clientusername", client.getUserName());
+
+
+
+            String clientprofilelist = profileservice.findByUserName(client.getUserName());
+            String clientfriendslist = friendservice.findByUserName(client.getUserName());
+            System.out.println(clientprofilelist);
+            session.setAttribute("clientprofile", clientprofilelist);
+            session.setAttribute("clientfriends", clientfriendslist);
+            session.setAttribute("clientusername", username);
+
 
             // перенаправляем на главную страницу
             response.sendRedirect("/firstsemestr_war_exploded/profile");

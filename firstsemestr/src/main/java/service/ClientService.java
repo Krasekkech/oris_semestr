@@ -28,4 +28,7 @@ public class ClientService {
     public Client findByUserName(String userName) {
         return repository.findByUserName(userName);
     }
+
+    public Client copy(Client client) {return repository.copy(client);
+    }
 }

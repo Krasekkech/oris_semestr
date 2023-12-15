@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Client;
+import model.ClientProfile;
+import service.ClientProfileService;
 import service.ClientService;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
 
     private ClientService service = new ClientService();
+    private ClientProfileService profileservice = new ClientProfileService();
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -32,6 +35,9 @@ public class RegistrationServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        Client clientcheck = service.findByUserName(username);
+
+        if(clientcheck == null){
         // создаем нового пользователя
         Client client = new Client();
         client.setName(name);
@@ -46,11 +52,31 @@ public class RegistrationServlet extends HttpServlet {
         // Создаем сессию для пользователя, в атрибутах которой сохраним его идентификаторы
         HttpSession session = request.getSession();
 
+        //client = service.copy(client);
+
+        ClientProfile clientProfile = new ClientProfile();
+        //clientProfile.setId(null);
+        clientProfile.setUsername(username);
+        clientProfile.setName(null);
+        clientProfile.setAge(null);
+        clientProfile.setBirthdate(null);
+        clientProfile.setUserinfo(null);
+        clientProfile = profileservice.save(clientProfile);
+
+
+        // String clientprofilelist = profileservice.findById(client.getId());
+
         // будем хранить в сессии имя клиента и его id для работы с БД
         session.setAttribute("clientname", client.getName());
         session.setAttribute("clientid", client.getId());
+        session.setAttribute("clientusername", client.getUserName());
+        //session.setAttribute("clientprofile", clientprofilelist);
 
         // перенаправляем на главную страницу
-        response.sendRedirect("/firstsemestr_war_exploded/profile");
+        response.sendRedirect("/firstsemestr_war_exploded/login");}
+        else {
+            request.setAttribute("message", "Данный логин занят");
+            request.getRequestDispatcher("regpage.ftl").forward(request, response);
+        }
     }
 }
