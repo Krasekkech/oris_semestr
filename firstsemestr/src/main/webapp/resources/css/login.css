@@ -1,0 +1,60 @@
+@font-face {
+    font-family: WebFont;
+    src: url("/firstsemestr_war_exploded/resources/fonts/Inter-Black.ttf");
+}
+html{   font-family: WebFont, serif;
+}
+body{
+    background-image: linear-gradient(120deg, rgba(225, 193, 65, 0.94), rgba(255, 213, 0, 0.93));
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    color: white;
+    justify-content: center;
+}
+
+.main__content{
+    display: flex;
+    justify-content: center;
+    width: 66%;
+    /*border: 3px solid white;*/
+    border-radius: 5px;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: rgba(150, 128, 40, 0.48);
+}
+
+h1,h2{
+    display: flex;
+    justify-content: center;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.btn_div{
+    display: flex;
+    justify-content: center;
+}
+table{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    display: flex;
+    justify-content: center;
+}
+label{
+    font-size: 18px;
+}
+.lin{
+    display: flex;
+    justify-content: center;
+
+}
